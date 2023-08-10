@@ -3,6 +3,7 @@
 
 + [ ] Frontend
   + [ ] Setup project with Next, TypeScript and App Router
+  + [ ] integrate FireAuth, FireStore
   + [ ] Flipkart mainpage clone
   + [ ] Chat Widget as a component
   + [ ] Two way process:
@@ -16,4 +17,18 @@
     + [ ] add buy this on Flipkart/search this on Flipkart option <- needs a built product catalog. will look at later
     + [ ] enable a try it out feature using camera
 + [ ] Backend
+  + [ ] setup basic skeleton with FastAPI
+  + [ ] segregate ML loads from general loads to acheive best performance
+    - we will mention this explicitely.
+  + [ ] expose endpoint for running a cron job to digest all the social media scrapes
+    + integrate instagram API to scrape at a specific time of the day
+  + [ ] expose endpoint for taking in user tags, and munching with the browsing history from the database, and product purchase history
++ [ ] Database
+  + [ ] database design of collections
+    + [ ] user collection: to store user metadata
+    + [ ] purchase history collection: purchase history per user <- optional
+    + [ ] browsing history collection: browsing history per user <- optional
+    + [ ] tags collection: purchased tags/browsing history tags dumped from a cron job from above to this collection
+      - auto populate by default right now
+    + [ ] social media trends: based on age, gender, region scraped by a cron job
 + [ ] Machine Learning (GenAI)
