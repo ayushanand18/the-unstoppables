@@ -6,11 +6,11 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import laptop from '../public/assets/images/Banners/laptop.webp'
-import ticketDeals from '../public/assets/images/Banners/ticketDeals.webp'
-import zebronics from '../public/assets/images/Banners/zebronics.webp'
-import vivo from '../public/assets/images/Banners/vivo.webp'
-import oppoReno7 from '../public/assets/images/Banners/oppo-reno7.webp'
+import laptop from '../../../public/assets/images/Banners/laptop.webp'
+import ticketDeals from '../../../public/assets/images/Banners/ticketDeals.webp'
+import zebronics from '../../../public/assets/images/Banners/zebronics.webp'
+import vivo from '../../../public/assets/images/Banners/vivo.webp'
+import oppoReno7 from '../../../public/assets/images/Banners/oppo-reno7.webp'
 import Image from 'next/image';
 
 interface PreviousBtnProps {
@@ -26,7 +26,7 @@ interface NextBtnProps {
 const PreviousBtn: React.FC<PreviousBtnProps> = ({ className, onClick }) => {
   return (
     <div className={className} onClick={onClick}>
-      <ArrowBackIosIcon />
+      <ArrowBackIosIcon className='ml-4'/>
     </div>
   );
 };
@@ -34,7 +34,7 @@ const PreviousBtn: React.FC<PreviousBtnProps> = ({ className, onClick }) => {
 const NextBtn: React.FC<NextBtnProps> = ({ className, onClick }) => {
   return (
     <div className={className} onClick={onClick}>
-      <ArrowForwardIosIcon />
+      <ArrowForwardIosIcon/>
     </div>
   );
 };
@@ -47,6 +47,7 @@ const Carousal: React.FC = () => {
     dots: false,
     infinite: true,
     speed: 500,
+    fade:false,
     slidesToShow: 1,
     slidesToScroll: 1,
     prevArrow: <PreviousBtn />,
@@ -56,12 +57,12 @@ const Carousal: React.FC = () => {
   const banners = [laptop,vivo,ticketDeals,oppoReno7,zebronics];
 
   return (
-    <section className="h-72 sm:h-72 w-full rounded-sm shadow relative overflow-hidden mt-20">
+    <section className="h-44 sm:h-72 w-full mx-auto rounded-sm shadow relative overflow-hidden ">
       <Slider {...settings}>
         {banners.map((el, i) => (
           <Image
             draggable="false"
-            className="h-72 sm:h-72 w-full object-cover"
+            className="h-44 sm:h-72 w-full object-cover"
             src={el}
             alt="banner"
             key={i}

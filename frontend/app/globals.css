@@ -7,6 +7,12 @@
     --background-end-rgb: 255, 255, 255;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 @media (prefers-color-scheme: dark) {
      :root {
         --foreground-rgb: 255, 255, 255;
@@ -17,7 +23,7 @@
 
 body {
     color: rgb(var(--foreground-rgb));
-    background: linear-gradient( to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+    background-color: #e9f2f24d;
 }
 
 
@@ -54,17 +60,26 @@ body {
     box-shadow: 0 8px 12px rgba(0, 0, 0, .2);
     background: #fcfcfc;
     color: #000;
-    z-index: 1;
+    z-index: 80;
+    opacity: 1;
 }
 
 .slick-prev {
     left: 0;
+    margin-left: 1rem;
     border-radius: 0 5px 5px 0;
 }
 
 .slick-next {
     right: 0;
+    margin-right: 1rem;
     border-radius: 5px 0 0 5px;
+}
+
+.slick-arrow.slick-prev:hover,
+.slick-arrow.slick-next:hover {
+    background-color: #fcfcfc;
+    color: black;
 }
 
 .slick-prev::before,

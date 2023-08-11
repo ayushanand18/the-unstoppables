@@ -37,6 +37,7 @@ const config: Config = {
         orange: '#fb641b',
         darkBlue: '#172337',
         grey: '#878787',
+        backgroundColor: '#d7dbdb'
       },
     },
     animation: {
