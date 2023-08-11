@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+     :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0;
+    }
+}
+
+body {
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient( to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+
+/* hover navbar dropdown arrow */
+
+.arrow_down {
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
+    border-bottom: 11px solid #fff;
+}
+
+
+/* hover navbar dropdown arrow */
+
+
+/* login signup sidebar bg image */
+
+.loginSidebar {
+    background-image: url("https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/login_img_c4a81e.png");
+    background-position: center 85%;
+    background-repeat: no-repeat;
+}
+
+
+/* login signup sidebar bg image */
+
+.slick-arrow.slick-prev,
+.slick-arrow.slick-next {
+    width: 47px;
+    height: 104px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, .2);
+    background: #fcfcfc;
+    color: #000;
+    z-index: 1;
+}
+
+.slick-prev {
+    left: 0;
+    border-radius: 0 5px 5px 0;
+}
+
+.slick-next {
+    right: 0;
+    border-radius: 5px 0 0 5px;
+}
+
+.slick-prev::before,
+.slick-next::before {
+    display: none;
+}
