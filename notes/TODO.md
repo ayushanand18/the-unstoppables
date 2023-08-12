@@ -2,7 +2,7 @@
 > Information on tasks to be accomplished as a checklist
 
 + [ ] Frontend
-  + [ ] Setup project with Next, TypeScript and App Router
+  + [x] Setup project with Next, TypeScript and App Router
   + [ ] integrate FireAuth, FireStore
   + [ ] Flipkart mainpage clone
   + [ ] Chat Widget as a component
