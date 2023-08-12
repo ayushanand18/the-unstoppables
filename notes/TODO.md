@@ -25,12 +25,12 @@
   + [ ] expose endpoint to generate using RunwayML based on the tags fetched from the DB
 + [ ] Database
   + [ ] database design of collections
-    + [ ] user collection: to store user metadata
-    + [ ] purchase history collection: purchase history per user <- optional
-    + [ ] browsing history collection: browsing history per user <- optional
-    + [ ] tags collection: purchased tags/browsing history tags dumped from a cron job from above to this collection
+    + [x] user collection: to store user metadata
+    + [x] purchase history collection: purchase history per user <- optional
+    + [x] browsing history collection: browsing history per user <- optional
+    + [x] tags collection: purchased tags/browsing history tags dumped from a cron job from above to this collection
       - auto populate by default right now
-    + [ ] social media trends: based on age, gender, region scraped by a cron job
+    + [ ] social media trends: based on age, gender, region scraped by a cron job <- use an sqlite DB on backend
 + [ ] Machine Learning (GenAI)
   + [ ] Runway ML API
   + [ ] Parse user feedback into actionable tasks. what to change and how - get the tags <- using CohereAI
