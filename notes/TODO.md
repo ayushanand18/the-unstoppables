@@ -4,7 +4,7 @@
 + [ ] Frontend
   + [x] Setup project with Next, TypeScript and App Router
   + [ ] integrate FireAuth, FireStore
-  + [ ] Flipkart mainpage clone
+  + [x] Flipkart mainpage clone
   + [ ] Chat Widget as a component
   + [ ] Two way process:
     + [ ] a single prompt and extract tags from it <- needs backend call
@@ -35,5 +35,5 @@
     + [ ] social media trends: based on age, gender, region scraped by a cron job
 + [ ] Machine Learning (GenAI)
   + [ ] Runway ML API
-  + [ ] Parse user feedback into actionable tasks. what to change and how - get the tags
+  + [ ] Parse user feedback into actionable tasks. what to change and how - get the tags <- using CohereAI
   + [ ] parse the scraped Insta Feed using an API <- just a tool, logic in backend part
