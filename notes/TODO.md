@@ -18,9 +18,7 @@
     + [ ] enable a try it out feature using camera
     + [ ] add user feedback on the generated image
 + [ ] Backend
-  + [ ] setup basic skeleton with FastAPI
-  + [ ] segregate ML loads from general loads to acheive best performance
-    - we will mention this explicitely.
+  + [x] setup basic skeleton with FastAPI
   + [ ] expose endpoint for running a cron job to digest all the social media scrapes
     + integrate instagram API to scrape at a specific time of the day
   + [ ] expose endpoint for taking in user tags, and munching with the browsing history from the database, and product purchase history
