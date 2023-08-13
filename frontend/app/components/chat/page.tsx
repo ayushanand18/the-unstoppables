@@ -38,6 +38,8 @@ const DefaultChatComponent = (props: IPropsChatModal) => {
                 <Button size="medium">Chat Now</Button>
             </CardActions>
             </Card>
+            
+            {/* Insert some more components here */}
             <div className=""></div>
         </>
     )
