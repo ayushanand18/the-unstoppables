@@ -1,8 +1,9 @@
 "use client"
 import React from "react"
+import { IPropsChatModal } from "../utilities/interfaces"
 
 
-const ChatOption1Modal  = () => {
+const ChatOption1Modal  = (props: IPropsChatModal) => {
     return (
         <div></div>
     )

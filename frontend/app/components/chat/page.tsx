@@ -2,8 +2,10 @@
 
 import * as React from 'react'
 import { Paper, Card, CardContent, CardActions, CardMedia, Button, Typography } from '@mui/material';
+import ChatOption1Modal from './chatOption1Modal';
+import { IPropsChatModal } from '../utilities/interfaces';
 
-const DefaultChatComponent = (props: any) => {
+const DefaultChatComponent = (props: IPropsChatModal) => {
     return (
         <>
             <div className="flex flex-col bg-blue-400 px-8 py-8 pt-24">
@@ -11,7 +13,7 @@ const DefaultChatComponent = (props: any) => {
                 <h2 className="font-bold text-xl text-white">How can we help you.</h2> 
 
                 <Paper variant="outlined" className="bg-white rounded-md my-4 px-4 py-2"
-                    onClick={(e) => props.setMode(true)}>
+                    onClick={(e) => props.setChatMode(true)}>
                     Send us a message
                 </Paper>
             </div>
@@ -53,8 +55,8 @@ const ChatComponent = () => {
 
             {displayModal && 
             <div className="fixed flex bg-white flex-col h-full w-[20em] right-10 bottom-20 rounded-lg z-20 top-10">
-                {chatMode===0 && <DefaultChatComponent setMode={setChatMode} />}
-                {chatMode===1 && }
+                {chatMode===0 && <DefaultChatComponent setChatMode={setChatMode} />}
+                {chatMode===1 && <ChatOption1Modal setChatMode={setChatMode} />}
             </div>}
         </>
     
