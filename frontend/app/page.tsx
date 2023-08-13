@@ -3,12 +3,15 @@ import Categories from './components/categories.tsx'
 import Carousal from './components/carousals/mainCarousal.tsx'
 import { offerProducts1,offerProducts2,offerProducts3 } from './components/utilities/constants.ts'
 import DynamicCarousal from './components/carousals/dynamicCarousal.tsx'
+import ChatComponent from './components/chat/page.tsx'
 
 const Page = () => {
+
   return (
     <div>
       <Categories/>
       <Carousal/>
+      <ChatComponent/>
       <DynamicCarousal title={"Our Best Deals For You"} productList={offerProducts1}/>
       <DynamicCarousal title={"Hurry!!! Grab them all"} productList={offerProducts2}/>
       <DynamicCarousal title={"Budget Sale Special"} productList={offerProducts3}/>

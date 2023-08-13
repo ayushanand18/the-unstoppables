@@ -34,7 +34,7 @@ interface NextBtnProps {
 const PreviousBtn: React.FC<PreviousBtnProps> = ({ className, onClick }) => {
   return (
     <div className={className} onClick={onClick}>
-      <ArrowBackIosIcon className='ml-4 z-50'/>
+      <ArrowBackIosIcon className='ml-4 z-10'/>
     </div>
   );
 };
@@ -42,7 +42,7 @@ const PreviousBtn: React.FC<PreviousBtnProps> = ({ className, onClick }) => {
 const NextBtn: React.FC<NextBtnProps> = ({ className, onClick }) => {
   return (
     <div className={className} onClick={onClick}>
-      <ArrowForwardIosIcon className='z-50'/>
+      <ArrowForwardIosIcon className='z-10'/>
     </div>
   );
 };
