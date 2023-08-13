@@ -33,5 +33,5 @@
     + [ ] social media trends: based on age, gender, region scraped by a cron job <- use an sqlite DB on backend
 + [ ] Machine Learning (GenAI)
   + [ ] Runway ML API
-  + [ ] Parse user feedback into actionable tasks. what to change and how - get the tags <- using CohereAI
+  + [x] Parse user feedback into actionable tasks. what to change and how - get the tags <- using CohereAI
   + [ ] parse the scraped Insta Feed using an API <- just a tool, logic in backend part
