@@ -65,7 +65,7 @@ COHERE_KEY = os.environ['COHERE_KEY']
 co = cohere.Client(COHERE_KEY)
 model = DiffusionImageGenerator.from_pretrained("openai/diffusion:main")
 nlp = spacy.load("en_core_web_sm")
-db_connection = sqlite3.connect("fashion_tags.db")
+db_connection = sqlite3.connect("db.qlite3")
 db_cursor = db_connection.cursor()
 
 #----------------------
