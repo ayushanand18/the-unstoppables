@@ -17,21 +17,21 @@
     + [ ] add buy this on Flipkart/search this on Flipkart option <- needs a built product catalog. will look at later
     + [ ] enable a try it out feature using camera
     + [ ] add user feedback on the generated image
-+ [ ] Backend
++ [x] Backend
   + [x] setup basic skeleton with FastAPI
-  + [ ] expose endpoint for running a cron job to digest all the social media scrapes
+  + [x] expose endpoint for running a cron job to digest all the social media scrapes
     + integrate instagram API to scrape at a specific time of the day
-  + [ ] expose endpoint for taking in user tags, and munching with the browsing history from the database, and product purchase history
-  + [ ] expose endpoint to generate using RunwayML based on the tags fetched from the DB
-+ [ ] Database
-  + [ ] database design of collections
+  + [x] expose endpoint for taking in user tags, and munching with the browsing history from the database, and product purchase history
+  + [x] expose endpoint to generate using RunwayML based on the tags fetched from the DB
++ [x] Database
+  + [x] database design of collections
     + [x] user collection: to store user metadata
     + [x] purchase history collection: purchase history per user <- optional
     + [x] browsing history collection: browsing history per user <- optional
     + [x] tags collection: purchased tags/browsing history tags dumped from a cron job from above to this collection
       - auto populate by default right now
-    + [ ] social media trends: based on age, gender, region scraped by a cron job <- use an sqlite DB on backend
+    + [x] social media trends: based on age, gender, region scraped by a cron job <- use an sqlite DB on backend
 + [ ] Machine Learning (GenAI)
-  + [ ] Runway ML API
+  + [x] HuggingFace Stable Diffusion API
   + [x] Parse user feedback into actionable tasks. what to change and how - get the tags <- using CohereAI
   + [ ] parse the scraped Insta Feed using an API <- just a tool, logic in backend part
