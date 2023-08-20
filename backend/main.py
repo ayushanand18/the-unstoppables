@@ -1,13 +1,22 @@
+"""Backend API using FastAPI"""
+
+import json
 import os
+
 from dotenv import load_dotenv
 from fastapi import FastAPI, status, Request
-from pydantic import BaseModel
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from firebase_admin import firestore, initialize_app, credentials
-import json
+from pydantic import BaseModel
+from transformers import DiffusionImageGenerator
 import cohere
+import spacy
 
+#---------------------
+# Loading and setting
+# essential stuff
+#---------------------
 load_dotenv()
 app = FastAPI()
 
@@ -25,15 +34,35 @@ app.add_middleware(
     expose_headers=["*"],
 )
 
+class GenerateImageRequest(BaseModel):
+    prompt: str
+    num_images: int = 1
+
+class GenerateImageResponse(BaseModel):
+    images: list[str]
+
+class TokenizeRequest:
+    def __init__(self, prompt: str):
+        self.prompt = prompt
+
+class TokenizeResponse:
+    def __init__(self, important_words: list[str]):
+        self.important_words = important_words
+
 #---------------------
 # Environment
 #---------------------
 COHERE_KEY = os.environ['COHERE_KEY']
-# cred = credentials.Certificate("magic-chat-ddf75-e3484fe17c32.json")
+# cred = credentials.Certificate("ddf75-e3484fe17c32.json")
 # initialize_app(cred)
 # db = firestore.client()
 co = cohere.Client(COHERE_KEY)
+model = DiffusionImageGenerator.from_pretrained("openai/diffusion:main")
+nlp = spacy.load("en_core_web_sm")
 
+#----------------------
+# API Endpoints
+#----------------------
 @app.get("/")
 async def root():
     """Main Root Function"""
@@ -61,3 +90,42 @@ async def parse_feedback(request: Request):
             "message": str(error),
         }
 
+@app.post("send-message")
+async def send_message(request: Request):
+    try:
+        req_body = await request.body()
+        req_data = json.loads(req_body)
+        prompt = req_data['prompt']
+
+        message = f"you are an expert fashion generator bot. answer this question now. ${prompt}"
+        response = co.generate(
+            prompt = message,
+        )
+
+        return response[0]
+    except BaseException as error:
+        return {
+            "status": "error",
+            "message": str(error),
+        }
+
+def tokenize_prompt(request: TokenizeRequest):
+    doc = nlp(request.prompt)
+    
+    # Extract important words based on POS (Part-of-Speech) tags
+    important_words = [token.text for token in doc if token.pos_ in ['NOUN', 'VERB', 'ADJ']]
+    
+    return TokenizeResponse(important_words=important_words)
+
+@app.post("/generate-image", response_model=GenerateImageResponse)
+async def generate_image(request: GenerateImageRequest):
+    """Generate Images based on Fashion prompt"""
+    try:
+        prompt = tokenize_prompt(request.prompt)
+        images = model.generate_images(prompt, num_images=4)
+        return {"images": images}
+    except Exception as error:
+        return {
+            "status": "error",
+            "message": str(error),
+        }
