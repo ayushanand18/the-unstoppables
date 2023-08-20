@@ -2,7 +2,9 @@
 
 import json
 import os
-
+import requests
+import sqlite3
+from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from fastapi import FastAPI, status, Request
 from fastapi.responses import JSONResponse
@@ -49,6 +51,10 @@ class TokenizeResponse:
     def __init__(self, important_words: list[str]):
         self.important_words = important_words
 
+class ScrapedImagesResponse:
+    def __init__(self, images: list[str]):
+        self.images = images
+
 #---------------------
 # Environment
 #---------------------
@@ -59,6 +65,8 @@ COHERE_KEY = os.environ['COHERE_KEY']
 co = cohere.Client(COHERE_KEY)
 model = DiffusionImageGenerator.from_pretrained("openai/diffusion:main")
 nlp = spacy.load("en_core_web_sm")
+db_connection = sqlite3.connect("fashion_tags.db")
+db_cursor = db_connection.cursor()
 
 #----------------------
 # API Endpoints
@@ -129,3 +137,58 @@ async def generate_image(request: GenerateImageRequest):
             "status": "error",
             "message": str(error),
         }
+
+def get_fashion_tags(image_url):
+    """Get Fashion Tags from locally hosted ML model"""
+    fashion_tagger_api_url = 'http://localhost:9000'
+    
+    response = requests.post(fashion_tagger_api_url, json={"image_url": image_url}, timeout=3000)
+    if response.status_code == 200:
+        tags = response.json().get("tags", [])
+        return tags
+    else:
+        return []
+
+@app.get("/scrape-instagram-with-tags", response_model=ScrapedImagesResponse)
+async def scrape_instagram_with_tags():
+    """Scrape Instagram Fashion to get recent trending fashion"""
+    base_url = "https://www.instagram.com/explore/tags/fashion/"
+    
+    try:
+        response = requests.get(base_url)
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.content, "html.parser")
+            image_tags = soup.find_all("img")
+            
+            images_with_tags = []
+            for img in image_tags:
+                if img.has_attr("src"):
+                    image_url = img["src"]
+                    age, gender, region, tags = get_fashion_tags(image_url)
+                    images_with_tags.append({"image_url": image_url, "age": age, "gender": gender, "region": region, "tags": tags})
+            
+            return ScrapedImagesResponse(images=images_with_tags)
+        else:
+            return ScrapedImagesResponse(images=[])
+    except Exception as e:
+        return ScrapedImagesResponse(images=[])
+
+def create_table():
+    """Create the 'fashion_tags' table if it doesn't exist"""
+    db_cursor.execute("""
+    CREATE TABLE IF NOT EXISTS fashion_tags (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        image_url TEXT,
+        age INTEGER,
+        region TEXT,
+        gender BOOLEAN NOT NULL,
+        tag TEXT
+    )
+    """)
+    db_connection.commit()
+
+def insert_tags(image_url, age, region, gender, tags):
+    """Insert image URL, tags, etc into the database"""
+    for tag in tags:
+        db_cursor.execute("INSERT INTO fashion_tags (image_url, age, region, gender, tag) VALUES (?, ?)", (image_url, age, region, gender, tag))
+    db_connection.commit()
